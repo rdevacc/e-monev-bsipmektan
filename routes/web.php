@@ -33,6 +33,8 @@ Route::get('/app/login', [LoginController::class, 'index'])->name('login');
 Route::post('/app/login', [LoginController::class, 'authenticate']);
 Route::get('/app/logout', [LoginController::class, 'logout'])->middleware('auth')->name('logout');
 
+Route::get('/app/forgot-password', [LoginController::class, 'forogot-password'])->name('forogot-password');
+
 Route::get('/app/activities/search', [ActivitiesFilterController::class, 'search'])->middleware('auth');
 Route::get('/app/activities/filter', [ActivitiesFilterController::class, 'filter'])->middleware('auth');
 

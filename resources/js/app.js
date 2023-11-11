@@ -1,4 +1,5 @@
 import "./bootstrap";
+import "flowbite";
 
 // Hamburger
 $("#hamburger").on("click", function (e) {

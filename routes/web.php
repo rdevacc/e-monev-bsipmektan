@@ -33,7 +33,11 @@ Route::get('/app/login', [LoginController::class, 'index'])->name('login');
 Route::post('/app/login', [LoginController::class, 'authenticate']);
 Route::get('/app/logout', [LoginController::class, 'logout'])->middleware('auth')->name('logout');
 
-Route::get('/app/forgot-password', [LoginController::class, 'forogot-password'])->name('forogot-password');
+Route::get('/app/forgot-password', [LoginController::class, 'forgot_password'])->middleware('guest')->name('forgot-password');
+Route::post('/app/forgot-password-submit', [LoginController::class, 'forgot_password_submit'])->name('forgot-password-submit');
+
+Route::get('/app/reset-password/{token}', [LoginController::class, 'reset_password'])->middleware('guest')->name('reset-password');
+Route::post('/app/reset-password/', [LoginController::class, 'reset_password_submit'])->middleware('guest')->name('reset-password-submit');
 
 Route::get('/app/activities/search', [ActivitiesFilterController::class, 'search'])->middleware('auth');
 Route::get('/app/activities/filter', [ActivitiesFilterController::class, 'filter'])->middleware('auth');

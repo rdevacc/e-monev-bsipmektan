@@ -62,7 +62,6 @@ class ActivityController extends Controller
 
     public function create()
     {
-
         $users = User::orderBy('name')->get();
         $departments = Department::orderBy('name')->get();
         $divisions = Division::orderBy('name')->get();

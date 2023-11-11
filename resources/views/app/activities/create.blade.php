@@ -14,8 +14,8 @@
             </ul>
         </div>
         @endif
-        <div class="px-2 py-1 mx-2 my-1 bg-gray-100 rounded">
-            <form action="/app/activities" method="POST" class="w-full bg-white shadow-md rounded my-1 px-4 pt-2 pb-4 space-y-4 lg:px-16">
+        <div class="w-full p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
+            <form action="/app/activities" method="POST" class="space-y-4">
                 @csrf
                 <div class="flex justify-between sm:flex-col sm:space-y-1">
                     <label class="label-form" for="name">Nama <span class="text-red-600 text-sm">*</span></label>
@@ -26,12 +26,8 @@
                     <select name="user_id" id="user_id" class="input-form">
                         <option selected disabled>Pilih Kelompok</option>
                         @foreach ($users as $user)
-                            @if (old('user_id'))
-                            <option value="{{ $user->id }}" selected>{{$user->name}}</option>
-                            @else
-                            <option value="{{ Auth::user()->id }}" selected>{{ Auth::user()->name }}</option>
-                            @endif
-                        @endforeach
+                        <option value="{{ $user->id }}" @selected(old('user_id') == $user->id)>{{$user->name}}</option>
+                    @endforeach
                     </select>
                 </div>
                 <div class="flex justify-between sm:flex-col sm:space-y-1">

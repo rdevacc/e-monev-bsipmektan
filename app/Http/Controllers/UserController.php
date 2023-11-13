@@ -5,14 +5,19 @@ namespace App\Http\Controllers;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\URL;
 
 class UserController extends Controller
 {
     public function index()
     {
-        $users = User::orderBy('role_id')->get();
+        $admin_users = User::orderBy('role_id')->get();
+        $users = User::where('role_id', '!=', 1)->get();
 
         return view('app.users.index', [
+            'admin_users' => $admin_users,
             'users' => $users,
         ]);
     }
@@ -40,9 +45,15 @@ class UserController extends Controller
         return redirect('/app/users');
     }
 
-    public function edit(Request $request, User $user)
+    public function edit(User $user)
     {
         $user_id = $user->id;
+
+        $path_admin = "app/users/1/edit";
+
+        if (request()->path() == $path_admin && auth()->user()->id != 1) {
+            abort(401);
+        }
 
         $data = User::find($user_id);
         $roles = Role::orderBy('id')->get();

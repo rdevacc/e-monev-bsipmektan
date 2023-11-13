@@ -19,9 +19,9 @@ return new class extends Migration
             $table->string('name');
             $table->float('budget', 16, 2)->default(0);
             $table->float('financial_target', 16, 2)->default(0);
-            $table->float('financial_realization', 16, 2);
+            $table->float('financial_realization', 16, 2)->default(0);
             $table->float('physical_target', 16, 2)->default(0);
-            $table->float('physical_realization', 16, 2);
+            $table->float('physical_realization', 16, 2)->default(0);
             $table->json('dones')->nullable();
             $table->json('problems')->nullable();
             $table->json('follow_up')->nullable();

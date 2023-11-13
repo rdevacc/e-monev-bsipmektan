@@ -16,8 +16,8 @@
             @endif
 
 
-        <div class="px-2 py-1 mx-2 my-1 bg-gray-100 rounded">
-            <form action="/app/activities/{{$activity->id}}" method="POST" class="w-full bg-white shadow-md rounded my-1 px-4 pt-2 pb-4 space-y-4 lg:px-16">
+        <div class="w-full p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
+            <form action="/app/activities/{{$activity->id}}" method="POST" class="space-y-4">
                 @method('PUT')
                 @csrf
                 <div class="flex justify-between sm:flex-col sm:space-y-1">
@@ -26,17 +26,21 @@
                 </div>
                 <div class="flex justify-between sm:flex-col sm:space-y-1">
                     <label class="label-form" for="user_id">Penanggung Jawab <span class="text-red-600 text-sm">*</span></label>
+                    @if(!Auth::user()->id != 1 || !Auth::user()->id != 2)
+                    <input class="input-form-number bg-gray-200" name="user_id" id="user_id" type="hidden" value="{{ Auth::user()->id }}" readonly>
+                    <input class="input-form-number bg-gray-200" type="text" value="{{ Auth::user()->name }}" readonly>
+                    @else
                     <select name="user_id" id="user_id" class="input-form">
                         <option selected disabled>Pilih PJ</option>
                         @foreach ($users as $user)
                             @if (old('user_id', $activity->user->id) == $user->id)
                             <option value="{{ $user->id }}" selected>{{$user->name}}</option>
                             @else
-                            <option value="{{ $user->id }}">{{$user->name}}</option>
+                            <option value="{{ Auth::user()->id }}">{{ Auth::user()->name }}</option>
                             @endif
-
                     @endforeach
                     </select>
+                    @endif
                 </div>
                 <div class="flex justify-between sm:flex-col sm:space-y-1">
                     <label class="label-form" for="department_id">Kelompok <span class="text-red-600 text-sm">*</span></label>
@@ -66,24 +70,38 @@
                 </div>
                 <div class="flex justify-between sm:flex-col sm:space-y-1">
                     <label class="label-form" for="budget">Anggaran Kegiatan Kelompok <span class="text-red-600 text-sm">*</span></label>
-                    <input class="input-form-number bg-gray-200" name="budget" id="budget" type="number" value="{{ old('budget') ? : $activity->budget }}" readonly>
+                    <input class="input-form-number bg-gray-200" name="budget" id="budget" type="number" value="{{ old("budget") ? : $activity->budget}}" readonly>
                 </div>
+                @can('superAdminAndAdmin')
                 <div class="flex justify-between sm:flex-col sm:space-y-1">
                     <label class="label-form" for="fincial_target">Target Keuangan <span class="text-red-600 text-sm">*</span></label>
                     <input class="input-form-number" name="financial_target" id="financial_target" type="number" placeholder="" value="{{old('financial_target') ? : $activity->financial_target}}">
                 </div>
+                @error('financial_target')
+                <div class="text-white text-sm bg-red-600 rounded-md px-2 py-1">{{ $message }}</div>
+                @enderror
                 <div class="flex justify-between sm:flex-col sm:space-y-1">
                     <label class="label-form" for="fincial_realization">Realisasi Keuangan <span class="text-red-600 text-sm">*</span></label>
                     <input class="input-form-number" name="financial_realization" id="financial_realization" type="number" placeholder="" value="{{old('financial_realization') ? : $activity->financial_realization}}">
                 </div>
+                @error('financial_realization')
+                <div class="text-white text-sm bg-red-600 rounded-md px-2 py-1">{{ $message }}</div>
+                @enderror
                 <div class="flex justify-between sm:flex-col sm:space-y-1">
                     <label class="label-form" for="physical_target">Target Fisik <span class="text-red-600 text-sm">*</span></label>
                     <input class="input-form-number" name="physical_target" id="physical_target" type="number" placeholder="" value="{{old('physical_target') ? : $activity->physical_target}}">
                 </div>
+                @error('physical_target')
+                <div class="text-white text-sm bg-red-600 rounded-md px-2 py-1">{{ $message }}</div>
+                @enderror
                 <div class="flex justify-between sm:flex-col sm:space-y-1">
                     <label class="label-form" for="physical_realization">Realisasi Fisik <span class="text-red-600 text-sm">*</span></label>
                     <input class="input-form-number" name="physical_realization" id="physical_realization" type="number" placeholder="" value="{{old('physical_realization') ? : $activity->physical_realization}}">
-                </div>
+                </div>  
+                @error('physical_realization')
+                <div class="text-white text-sm bg-red-600 rounded-md px-2 py-1">{{ $message }}</div>
+                @enderror             
+                @endcan
                 <div id="donesField" class="flex-col justify-between space-y-2">
                     <div class="flex space-x-1 items-center justify-between">
                         <label class="label-form-1" for="dones">Kegiatan yang sudah dikerjakan</label>
@@ -98,6 +116,9 @@
                     </div>
                     @endforeach
                 </div>
+                @error('dones.*')
+                <div class="text-white text-sm bg-red-600 rounded-md px-2 py-1">{{ $message }}</div>
+                @enderror 
                 <div id="problemsField" class="flex-col justify-between space-y-2">
                     <div class="flex space-x-1 items-center justify-between">
                         <label class="label-form-1" for="problems">Permasalahan</label>
@@ -112,6 +133,9 @@
                     </div>
                     @endforeach
                 </div>
+                @error('problems.*')
+                <div class="text-white text-sm bg-red-600 rounded-md px-2 py-1">{{ $message }}</div>
+                @enderror
                 <div id="follow_UpField" class="flex-col justify-between space-y-2">
                     <div class="flex space-x-1 items-center justify-between">
                         <label class="label-form-1" for="follow_up">Tindak Lanjut</label>
@@ -126,6 +150,9 @@
                     </div>
                     @endforeach
                 </div>
+                @error('follow_up.*')
+                <div class="text-white text-sm bg-red-600 rounded-md px-2 py-1">{{ $message }}</div>
+                @enderror
                 <div id="todosField" class="flex-col justify-between space-y-2">
                     <div class="flex space-x-1 items-center justify-between">
                         <label class="label-form-1" for="todos">Kegiatan yang akan dilakukan</label>
@@ -140,6 +167,9 @@
                     </div>
                     @endforeach
                 </div>
+                @error('todos.*')
+                <div class="text-white text-sm bg-red-600 rounded-md px-2 py-1">{{ $message }}</div>
+                @enderror
                 
                 {{-- Button --}}
                 <div class="flex justify-end pt-4 space-x-2">

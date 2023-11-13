@@ -82,30 +82,39 @@ class ActivityController extends Controller
             'division_id' => 'required',
             'name' => 'required',
             'budget' => 'required',
-            'financial_target' => 'required',
-            'financial_realization' => 'required',
-            'physical_target' => 'required',
-            'physical_realization' => 'required',
-            'dones' => 'required',
-            'problems' => 'required',
-            'follow_up' => 'required',
-            'todos' => 'required',
+            // 'financial_target' => 'required',
+            // 'financial_realization' => 'required',
+            // 'physical_target' => 'required',
+            // 'physical_realization' => 'required',
+            'dones.*' => 'required',
+            'problems.*' => 'required',
+            'follow_up.*' => 'required',
+            'todos.*' => 'required',
+        ], [
+            'user_id.required' => 'User id field is required!',
+            'department_id.required' => 'Department id field is required!',
+            'division_id.required' => 'Division id field is required!',
+            'name.required' => 'Name field field is required!',
+            'budget.required' => 'Budget field field is required!',
+            // 'financial_target.required' => 'Financial target field field is required!',
+            // 'financial_realization.required' => 'Financial realization field field is required!',
+            // 'physical_target.required' => 'Physical target field field is required!',
+            // 'physical_realization.required' => 'Physical realization field field is required!',
+            'dones.*.required' => 'Dones field field is required!',
+            'problems.*.required' => 'Problems field field is required!',
+            'follow_up.*.required' => 'Follow up field field is required!',
+            'todos.*.required' => 'Todos field field is required!',
         ]);
 
-        if (is_null(Arr::last($validated['dones']))) {
-            $x = Arr::last($validated['dones']);
-            $x = '-';
-            return $validated['dones'];
-        }
-        if (is_null(Arr::last($validated['problems']))) {
-            return dd("problems Null");
-        }
-        if (is_null(Arr::last($validated['follow_up']))) {
-            return dd("follow_up Null");
-        }
-        if (is_null(Arr::last($validated['todos']))) {
-            return dd("todos Null");
-        }
+        // Change null value in array to "-"
+        // if (Arr::last($validated['dones']) == null || Arr::last($validated['dones']) == 'null') {
+        //     array_pop($validated['dones']);
+        //     array_push($validated['dones'], "-");
+
+        //     Activity::create($validated);
+
+        //     return redirect('/app/activities');
+        // }
 
         Activity::create($validated);
 
@@ -137,35 +146,33 @@ class ActivityController extends Controller
             'division_id' => 'required',
             'name' => 'required',
             'budget' => 'required',
-            'financial_target' => 'required',
-            'financial_realization' => 'required',
-            'physical_target' => 'required',
-            'physical_realization' => 'required',
-            'dones' => 'required',
-            'problems' => 'required',
-            'follow_up' => 'required',
-            'todos' => 'required',
+            'financial_target' => 'nullable',
+            'financial_realization' => 'nullable',
+            'physical_target' => 'nullable',
+            'physical_realization' => 'nullable',
+            'dones.*' => 'required',
+            'problems.*' => 'required',
+            'follow_up.*' => 'required',
+            'todos.*' => 'required',
+        ], [
+            'user_id.required' => 'User id field is required!',
+            'department_id.required' => 'Department id field is required!',
+            'division_id.required' => 'Division id field is required!',
+            'name.required' => 'Name field field is required!',
+            'budget.required' => 'Budget field field is required!',
+            // 'financial_target.required' => 'Financial target field field is required!',
+            // 'financial_realization.required' => 'Financial realization field field is required!',
+            // 'physical_target.required' => 'Physical target field field is required!',
+            // 'physical_realization.required' => 'Physical realization field field is required!',
+            'dones.*.required' => 'Dones field field is required!',
+            'problems.*.required' => 'Problems field field is required!',
+            'follow_up.*.required' => 'Follow up field field is required!',
+            'todos.*.required' => 'Todos field field is required!',
         ]);
-
-
-        if (is_null(Arr::last($validated['dones']))) {
-            $x = Arr::last($validated['dones']);
-            $x = '-';
-            return $validated['dones'];
-        }
-        if (is_null(Arr::last($validated['problems']))) {
-            return dd("problems Null");
-        }
-        if (is_null(Arr::last($validated['follow_up']))) {
-            return dd("follow_up Null");
-        }
-        if (is_null(Arr::last($validated['todos']))) {
-            return dd("todos Null");
-        }
 
         $activity->update($validated);
 
-        return redirect()->to('/app/activities');
+        return redirect()->to('/app/activities')->with('success', 'Kegiatan Berhasil Diupdate !');
     }
 
     public function destroy(Activity $activity)
@@ -173,7 +180,7 @@ class ActivityController extends Controller
 
         Activity::destroy($activity->id);
 
-        return redirect()->to('/app/activities/');
+        return redirect()->to('/app/activities/')->with('success', 'Kegiatan Berhasil Dihapus !');
     }
 
     public function fetchBudget(Request $request)

@@ -183,6 +183,14 @@
     </table>
    </div> --}}
 
+    @if (session('success'))
+    <div class="pb-4">
+        <div class="flex w-1/2 bg-green-800 rounded-md p-2 mx-auto text-center justify-center items-center">
+            <span class="text-slate-100 align-middle">{{ session('success') }}</span>   
+        </div>
+    </div>
+    @endif
+
     {{-- Table 2 --}}
     <div class="relative overflow-x-auto shadow-md rounded-md">
         <table class="table table-auto w-full text-sm text-left text-gray-500 dark:text-gray-300">

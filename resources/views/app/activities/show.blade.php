@@ -3,37 +3,6 @@
 @section('page-content')
 
 <div class="px-4 py-4 md:pl-[17rem] md:pr-4">
-    <div class="font-bold">
-        <span>PROGRES PELAKSANAAN KEGIATAN BSIP MEKTAN TAHUN {{$currentYear}}</span>
-    </div>
-    <br>
-    <table>
-        <tr>
-            <td>Sampai dengan akhir bulan</td>
-            <td>:</td>
-            <th align="left">{{$currentMonth}}</th>
-        </tr>
-        <tr>
-            <td>Kelompok</td>
-            <td>:</td>
-            <th align="left">{{$activity->department->name}}</th>
-        </tr>
-        <tr>
-            <td>Subkelompok</td>
-            <td>:</td>
-            <th align="left">{{$activity->division->name}}</th>
-        </tr>
-        <tr>
-            <td>Penanggung Jawab</td>
-            <td>:</td>
-            <th align="left">{{$activity->user->name}}</th>
-        </tr>
-        <tr>
-            <td>Anggaran</td>
-            <td>:</td>
-            <th align="left">{{ formatRupiah($activity->budget) }}</th>
-        </tr>
-    </table>
     
     <div class="flex justify-end pb-4">
         <div class="flex justify-end px-2 py-2 space-x-2 items-center">
@@ -71,7 +40,38 @@
     </div>
 
         {{-- Table --}}
-    <div class="relative overflow-x-auto shadow-md rounded-md">
+    <div class="relative overflow-x-auto shadow-md rounded-md w-full lg:max-w-full p-6 bg-white space-y-4">
+        <div class="font-bold">
+            <span>PROGRES PELAKSANAAN KEGIATAN BSIP MEKTAN TAHUN {{$currentYear}}</span>
+        </div>
+
+        <table>
+            <tr>
+                <td>Sampai dengan akhir bulan</td>
+                <td>:</td>
+                <th align="left">{{$currentMonth}}</th>
+            </tr>
+            <tr>
+                <td>Kelompok</td>
+                <td>:</td>
+                <th align="left">{{$activity->department->name}}</th>
+            </tr>
+            <tr>
+                <td>Subkelompok</td>
+                <td>:</td>
+                <th align="left">{{$activity->division->name}}</th>
+            </tr>
+            <tr>
+                <td>Penanggung Jawab</td>
+                <td>:</td>
+                <th align="left">{{$activity->user->name}}</th>
+            </tr>
+            <tr>
+                <td>Anggaran</td>
+                <td>:</td>
+                <th align="left">{{ formatRupiah($activity->budget) }}</th>
+            </tr>
+        </table>
         <table class="table table-auto w-full text-sm text-left text-gray-500 dark:text-gray-300">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-300">
                 <tr>
@@ -120,7 +120,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                <tr class="bg-white border-b space-y-4 dark:bg-gray-800 dark:border-gray-700">
                     <td class="align-text-top text-center"><span class="font-semibold">1.</span></td>
                     <td class="align-text-top"><a href="/app/activities/{{$activity->id}}">{{ $activity->name }}</a></td>
                     <td class="align-text-top text-center">{{ $activity->department->name }}</td>

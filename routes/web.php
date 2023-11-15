@@ -29,7 +29,7 @@ Route::get('/', function () {
 
 Route::get('/app/dashboard', [DashboardController::class, 'index'])->middleware('auth');
 
-Route::get('/app/login', [LoginController::class, 'index'])->name('login');
+Route::get('/app/login', [LoginController::class, 'index'])->middleware('guest')->name('login');
 Route::post('/app/login', [LoginController::class, 'authenticate']);
 Route::get('/app/logout', [LoginController::class, 'logout'])->middleware('auth')->name('logout');
 

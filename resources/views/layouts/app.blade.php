@@ -8,7 +8,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body>
+<body class="bg-slate-300 h-full">
 
     {{-- Header --}}
     <header>
@@ -27,5 +27,6 @@
 </body>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+@yield('script')
 
 </html>

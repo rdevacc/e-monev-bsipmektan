@@ -192,7 +192,10 @@
     @endif
 
     {{-- Table 2 --}}
-    <div class="relative overflow-x-auto shadow-md rounded-md">
+    <div class="relative overflow-x-auto bg-white shadow-md rounded-md w-full lg:max-w-full p-4 space-y-4">
+        <div class="flex px-2 pb-4 pt-4 md:px-0 justify-center">
+            <h2 class="text-xl font-semibold ">Data Kegiatan Tahun 2023</h2>
+        </div>
         <table class="table table-auto w-full text-sm text-left text-gray-500 dark:text-gray-300">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-300">
                 <tr>
@@ -242,7 +245,7 @@
             </thead>
             <tbody>
                 @foreach ($activities as $index => $activity)
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                <tr class="bg-white space-y-4 border-b dark:bg-gray-800 dark:border-gray-700">
                     <td class="align-text-top text-center"><span class="font-semibold">{{ $loop->iteration }}.</span></td>
                     <td class="align-text-top"><a href="/app/activities/{{$activity->id}}">{{ $activity->name }}</a></td>
                     <td class="align-text-top text-center">{{ $activity->department->name }}</td>

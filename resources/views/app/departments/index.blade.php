@@ -2,7 +2,6 @@
 
 @section('page-content')
 <div class="py-4 md:pl-[16rem] pr-1">
-    <h2 class="flex justify-center font-bold text-xl md:text-2xl pb-4 xl:pb-2">Daftar Kelompok Kerja BSIP Mektan</h2>
     <div class="overflow-x-scroll xl:overflow-auto px-2">
         <div class="flex justify-end pb-2">
             <div class="flex justify-center w-24 h-10">
@@ -10,7 +9,10 @@
             </div>
         </div>
 
-        <div class="relative overflow-x-auto shadow-md rounded-md">
+        <div class="mx-2 px-2 py-3 bg-white shadow-md rounded-md w-full lg:max-w-full p-6 space-y-4">
+            <div class="flex px-2 pb-4 pt-4 md:px-0 justify-center">
+                <h2 class="text-xl md:text-2xl font-semibold">Data Kelompok Kerja BSIP Mektan</h2>
+            </div>
             <table class="table table-auto w-full text-sm text-left text-gray-500 dark:text-gray-300">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-300">
                     <tr>
@@ -51,7 +53,7 @@
                 </thead>
                 <tbody>
                     @foreach ($departments as $department)
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <tr class="bg-white border-b space-y-4 dark:bg-gray-800 dark:border-gray-700">
                             <td class="align-text-top text-center">{{ $loop->iteration }}</td>
                             <td class="align-text-top text-center">{{ $department->name }}</td>
                             <td class="align-text-top text-center">{{ $department->head_name }}</td>

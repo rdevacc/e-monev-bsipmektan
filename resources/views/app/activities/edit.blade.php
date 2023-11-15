@@ -2,21 +2,10 @@
 
 @section('page-content')
     <div class="py-4 md:pl-[17rem] md:pr-4">
-        <div class="pb-2 px-4">
-            <h2 class="text-2xl font-semibold">Edit Kegiatan</h2>
-        </div>
-        @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-            @endif
-
-
-        <div class="w-full p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
+        <div class="w-full p-4 bg-white border shadow-md rounded-md lg:max-w-full space-y-4 dark:bg-gray-800 dark:border-gray-700">
+            <div class="flex px-2 pb-4 pt-4 md:px-0 justify-center">
+                <h2 class="text-xl md:text-2xl font-semibold">Edit Kegiatan</h2>
+            </div>
             <form action="/app/activities/{{$activity->id}}" method="POST" class="space-y-4">
                 @method('PUT')
                 @csrf
@@ -26,7 +15,7 @@
                 </div>
                 <div class="flex justify-between sm:flex-col sm:space-y-1">
                     <label class="label-form" for="user_id">Penanggung Jawab <span class="text-red-600 text-sm">*</span></label>
-                    @if(!Auth::user()->id != 1 || !Auth::user()->id != 2)
+                    @if(Auth::user()->role_id != 1)
                     <input class="input-form-number bg-gray-200" name="user_id" id="user_id" type="hidden" value="{{ Auth::user()->id }}" readonly>
                     <input class="input-form-number bg-gray-200" type="text" value="{{ Auth::user()->name }}" readonly>
                     @else
@@ -36,7 +25,7 @@
                             @if (old('user_id', $activity->user->id) == $user->id)
                             <option value="{{ $user->id }}" selected>{{$user->name}}</option>
                             @else
-                            <option value="{{ Auth::user()->id }}">{{ Auth::user()->name }}</option>
+                            <option value="{{ $user->id }}">{{ $user->name }}</option>
                             @endif
                     @endforeach
                     </select>

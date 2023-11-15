@@ -68,7 +68,7 @@
                 <tbody>
                     @foreach ($activities as $index => $activity)
                     <tr class="bg-white border-b space-y-4 dark:bg-gray-800 dark:border-gray-700">
-                        <td class="align-text-top"><span class="font-semibold">{{ $loop->iteration }}.</span></td>
+                        <td class="align-text-top text-center"><span class="font-semibold">{{ $loop->iteration }}.</span></td>
                         <td class="align-text-top"><a href="/app/activities/{{$activity->id}}">{{ $activity->name }}</a></td>
                         <td class="align-text-top">
                             @foreach ($activity->todos as $key => $value)
@@ -79,13 +79,13 @@
                         </td>
                         <td class="align-text-top text-center">{{ $activity->created_at->format('d F Y') }}</td>
                         <td class="align-text-top text-center">
-                            @if ($activity->status == 'Sudah Selesai')
-                                <div class="bg-green-800 px-2.5 py-1 rounded">
-                                    <span class="text-white text-center text-sm font-semibold">{{ $activity->status }}</span>
+                            @if ($activity->status_id == 2)
+                                <div class="w-20 flex justify-center mx-auto bg-green-800 rounded p-1 lg:w-32">
+                                    <span class="text-white text-center text-sm font-semibold">{{ $activity->status->name }}</span>
                                 </div>
                             @else
-                            <div class="bg-red-700 rounded">
-                                <span class="text-white text-center text-sm font-semibold">{{ $activity->status }}</span>
+                            <div class="w-20 flex justify-center mx-auto bg-red-700 rounded p-1 lg:w-32">
+                                <span class="text-white text-center text-sm font-semibold">{{ $activity->status->name }}</span>
                             </div>
                             @endif
                         </td>

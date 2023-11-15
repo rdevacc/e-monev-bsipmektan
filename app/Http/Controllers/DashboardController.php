@@ -15,9 +15,9 @@ class DashboardController extends Controller
 
 
         if (Gate::allows('superAdminAndAdmin')) {
-            $activities = Activity::orderBy('status')->orderBy('created_at', 'desc')->get(['id', 'name', 'todos', 'created_at', 'status']);
+            $activities = Activity::orderBy('status_id')->orderBy('created_at', 'desc')->get(['id', 'name', 'todos', 'created_at', 'status_id']);
         } else {
-            $activities = Activity::orderBy('status')->orderBy('created_at', 'desc')->where('user_id', '=', $pj)->get(['id', 'user_id', 'name', 'todos', 'created_at', 'status']);
+            $activities = Activity::orderBy('status_id')->orderBy('created_at', 'desc')->where('user_id', '=', $pj)->get(['id', 'user_id', 'name', 'todos', 'created_at', 'status_id']);
         }
 
         return view('app.dashboard.index', [

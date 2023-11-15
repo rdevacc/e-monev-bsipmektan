@@ -15,8 +15,9 @@ class Activity extends Model
 
     protected $fillable = [
         'user_id',
-        'division_id',
         'department_id',
+        'division_id',
+        'status_id',
         'name',
         'budget',
         'financial_target',
@@ -84,6 +85,12 @@ class Activity extends Model
     public function division(): BelongsTo
     {
         return $this->BelongsTo(Division::class);
+    }
+
+    // Relationship to Activity_status table
+    public function status(): BelongsTo
+    {
+        return $this->BelongsTo(ActivityStatus::class);
     }
 
     public function toSearchableArray()

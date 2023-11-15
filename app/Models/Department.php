@@ -35,13 +35,13 @@ class Department extends Model
     }
 
     // Relationship to User table
-    public function user(): HasMany
+    public function users(): HasMany
     {
         return $this->hasMany(User::class);
     }
 
     // Relationship to Division table
-    public function division(): HasMany
+    public function divisions(): HasMany
     {
         return $this->hasMany(Division::class);
     }

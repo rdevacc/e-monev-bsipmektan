@@ -18,8 +18,9 @@ class ActivityFactory extends Factory
     {
         return [
             'user_id' => 1,
-            'department_id' => rand(1,4),
-            'division_id' => rand(1,2),
+            'department_id' => rand(1, 4),
+            'division_id' => rand(1, 2),
+            'status_id' => rand(1, 2),
             'name' => fake()->word(3),
             'budget' => 500000,
             'financial_target' => 50000,

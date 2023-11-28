@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,8 +17,13 @@ class ActivityFactory extends Factory
      */
     public function definition(): array
     {
+        $tahun = Date('Y');
+        $bulan = Date('m');
+
+        $random = Carbon::now()->subDays(rand(0, 200));
+
         return [
-            'user_id' => 1,
+            'user_id' => rand(2, 5),
             'department_id' => rand(1, 4),
             'division_id' => rand(1, 2),
             'status_id' => rand(1, 2),
@@ -31,6 +37,8 @@ class ActivityFactory extends Factory
             'problems' => ['problems 1'],
             'follow_up' => ['follow up 1'],
             'todos' => ['todos 1'],
+            'created_at' => $random,
+            'updated_at' => $random,
         ];
     }
 }

@@ -22,10 +22,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+Route::get('/', [LoginController::class, 'index'])->middleware('guest')->name('login');
 
 Route::get('/app/dashboard', [DashboardController::class, 'index'])->middleware('auth');
 

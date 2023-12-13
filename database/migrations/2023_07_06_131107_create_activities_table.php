@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id');
             $table->foreignId('department_id');
             $table->foreignId('division_id');
-            $table->foreignId('status_id');
+            $table->foreignId('status_id')->default(0);
             $table->string('name');
             $table->float('budget', 16, 2)->default(0);
             $table->float('financial_target', 16, 2)->default(0);
